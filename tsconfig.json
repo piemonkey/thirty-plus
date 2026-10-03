@@ -2,6 +2,7 @@
   "extends": "@ember/app-tsconfig",
   "include": ["app", "tests", "types"],
   "compilerOptions": {
+    "target": "es2026",
     "allowJs": true,
     "paths": {
       "thirty-plus/tests/*": ["./tests/*"],
