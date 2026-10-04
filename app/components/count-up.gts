@@ -4,27 +4,11 @@ import { tracked } from '@glimmer/tracking'
 import 'temporal-spec/global'
 
 export interface CountUpSignature {
-  Args: {}
+  Args: {
+    targetDate: Temporal.ZonedDateTime
+  }
   Element: null
 }
-
-const TARGET_DATE = Temporal.ZonedDateTime.from({
-  year: 2026,
-  month: 10,
-  day: 4,
-  hour: 21,
-  minute: 55,
-  timeZone: Temporal.Now.timeZoneId(),
-})
-const BIRTH_DATE = TARGET_DATE.subtract(Temporal.Duration.from({
-  years: 30,
-  months: 30,
-  weeks: 30,
-  // Maybe missed a leap year in the calculations?!?
-  days: 31,
-  hours: 30,
-  minutes: 30,
-}))
 
 const LIMIT = 30;
 function countToDisplay(num: number) {
@@ -79,9 +63,18 @@ export default class CountUp extends Component<CountUpSignature> {
   }
 
   @tracked now = Temporal.Now.zonedDateTimeISO()
-  dateCounts = generateDateCounts(BIRTH_DATE, this.now)
+  birthDate = this.args.targetDate.subtract(Temporal.Duration.from({
+    years: 30,
+    months: 30,
+    weeks: 30,
+    // Maybe miss a leap year in the calculations?!?
+    days: 31,
+    hours: 30,
+    minutes: 30,
+  }))
+  dateCounts = generateDateCounts(this.birthDate, this.now)
   get counts() {
-    const { remaining, ...dateCounts } = generateDateCounts(BIRTH_DATE, this.now)
+    const { remaining, ...dateCounts } = generateDateCounts(this.birthDate, this.now)
     return {
       ...dateCounts,
       ...generateTimeCounts(remaining, this.now),
