@@ -2,13 +2,52 @@
 body {
   background-color: #1F1F1F;
   color: #FFF;
+  font-family: "Courier New", monospace;
+  font-size: 36px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 60vh;
+}
+.title {
+  text-align: center;
 }
 .counter {
   display: flex;
+  align-items: center;
+  line-height: 1.5;
 }
 .number {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.count {
+  font-family: "DSEG7-Classic", "Courier New", monospace;
+  font-weight: bold;
+}
+.separator {
+  font-family: "DSEG7-Classic", "Courier New", monospace;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'DSEG7-Classic';
+  src: url('/assets/DSEG7Classic-Bold.woff2') format('woff2'),
+  url('/assets/DSEG7Classic-Bold.woff') format('woff'),
+  url('/assets/DSEG7Classic-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DSEG7-Classic';
+  src: url('/assets/DSEG7Classic-Regular.woff2') format('woff2'),
+  url('/assets/DSEG7Classic-Regular.woff') format('woff'),
+  url('/assets/DSEG7Classic-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

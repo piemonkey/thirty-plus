@@ -20,7 +20,8 @@ const BIRTH_DATE = TARGET_DATE.subtract(Temporal.Duration.from({
   years: 30,
   months: 30,
   weeks: 30,
-  days: 30,
+  // Maybe missed a leap year in the calculations?!?
+  days: 31,
   hours: 30,
   minutes: 30,
 }))
@@ -28,6 +29,9 @@ const BIRTH_DATE = TARGET_DATE.subtract(Temporal.Duration.from({
 const LIMIT = 30;
 function countToDisplay(num: number) {
   return num > LIMIT ? LIMIT : num;
+}
+function displayCount(num: number) {
+  return num.toFixed().length === 1 ? `0${num}` : `${num}`
 }
 
 function generateDateCounts(birthDate: Temporal.ZonedDateTime, now: Temporal.ZonedDateTime) {
@@ -89,18 +93,26 @@ export default class CountUp extends Component<CountUpSignature> {
   }
 
   ;<template>
-    <h2 id="title">30+ countdown</h2>
-    <div class="counter">
-      <div class="number"><div>years:</div><div class="count">{{this.counts.years}}</div></div>
-      <div class="number"><div>months:</div><div class="count">{{this.counts.months}}</div></div>
-      <div class="number"><div>weeks:</div><div class="count">{{this.counts.weeks}}</div></div>
-      <div class="number"><div>days:</div><div class="count">{{this.counts.days}}</div></div>
-      <div class="number"><div>hours:</div><div class="count">{{this.counts.hours}}</div></div>
-      <div class="number"><div>minutes:</div><div class="count">{{this.counts.minutes}}</div></div>
-      <div class="number"><div>seconds:</div><div class="count">{{this.counts.seconds}}</div></div>
+    <h2 class="title">30+ countdown</h2>
+    <div class="container">
+      <div class="counter">
+        <div class="number"><div>years</div><div class="count">{{displayCount this.counts.years}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>months</div><div class="count">{{displayCount this.counts.months}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>weeks</div><div class="count">{{displayCount this.counts.weeks}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>days</div><div class="count">{{displayCount this.counts.days}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>hours</div><div class="count">{{displayCount this.counts.hours}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>minutes</div><div class="count">{{displayCount this.counts.minutes}}</div></div>
+        <div class="separator">+</div>
+        <div class="number"><div>seconds</div><div class="count">{{displayCount this.counts.seconds}}</div></div>
+      </div>
     </div>
     {{#if this.moments}}
-      <div class="number"><div>moments:</div><div class="count">{{this.moments}}</div></div>
+      <div class="number"><div>moments</div><div class="count">{{displayCount this.moments}}</div></div>
     {{/if}}
   </template>
 }
