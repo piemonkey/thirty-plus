@@ -8,7 +8,7 @@ interface NowSignature {
   };
 }
 
-const nowish = Temporal.Now.zonedDateTimeISO().add({ seconds: 30 })
+const nowish = Temporal.Now.zonedDateTimeISO().add({ minutes: 30, seconds: 30 })
 console.log('Test target date', nowish)
 
 ;<template>

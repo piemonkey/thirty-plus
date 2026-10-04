@@ -34,6 +34,19 @@ body {
   font-weight: bold;
 }
 
+.bonus-list {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+.bonus-unit {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+}
+
 @font-face {
   font-family: 'DSEG7-Classic';
   src: url('/assets/DSEG7Classic-Bold.woff2') format('woff2'),

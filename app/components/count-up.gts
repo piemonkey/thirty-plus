@@ -47,12 +47,57 @@ function generateTimeCounts(remaining: Temporal.ZonedDateTime, now: Temporal.Zon
   remainingSecs = remainingSecs - hours * 60 * 60
   const minutes = countToDisplay(Math.trunc(remainingSecs / (30)) / 2)
   const seconds = Math.trunc(remainingSecs - minutes * 60)
+  const bonusUnits = minutes >= 30 ? generateBonusCounts(diff.total('milliseconds') - 30*60*60*1000 - 30*60*1000) : []
 
   return {
     hours,
     minutes,
     seconds,
+    bonusUnits,
   }
+}
+
+interface Unit {
+  name: string
+  millis: number
+}
+const UNITS: Unit[] = [
+  { name: '30^30 planck times', millis: 11100 },
+  // { name: 'Shakes', millis: },
+  { name: '30 jiffys', millis: 600 },
+  // { name: 'Svedbergs', millis: },
+  { name: 'TUs (Time Units)', millis: 1024 },
+  { name: 'microfortnights', millis: 1210 },
+  { name: 'moments', millis: 1500 },
+  { name: 'nanoCenturies', millis: 3156 },
+  { name: 'atoms', millis: 160 },
+  { name: 'avali', millis: 172 },
+  // { name: 'lavas', millis: },
+  { name: 'vighatis', millis: 24000 },
+  { name: 'a fēn (分)', millis: 14400 },
+  { name: 'milliKwartiers', millis: 900 },
+  { name: 'AverageTimeOfSaying‘30Plus’s', millis: 760 },
+  { name: 'heartbeats', millis: 800 },
+  { name: '‘dozijnste-scrupulum’', millis: 12500 },
+  { name: 'relative second', millis: 1047 },
+  { name: 'beard 30-nanometer', millis: 3000 },
+  { name: 'time-to-zone-outs', millis: 3330 },
+].toSorted(({ millis: a }, { millis: b}) => a - b)
+interface BonusCount {
+  name: string
+  count: number
+}
+function generateBonusCounts(millis: number) {
+  const counts: BonusCount[] = []
+  let i = 0
+  let unit
+  do {
+    unit = UNITS[i]
+    if (unit) {
+      counts.push({ name: unit.name, count: Math.trunc(millis / unit.millis) })
+    }
+  } while (++i < UNITS.length && (counts.at(-1)?.count ?? 0) >= 30)
+  return counts
 }
 
 export default class CountUp extends Component<CountUpSignature> {
@@ -81,10 +126,6 @@ export default class CountUp extends Component<CountUpSignature> {
     }
   }
 
-  get moments() {
-    return ((this.counts.hours == 30 && this.counts.minutes >= 30) || this.counts.hours > 30) && (this.counts.minutes / 1.5)
-  }
-
   ;<template>
     <h2 class="title">30+ countdown</h2>
     <div class="container">
@@ -103,9 +144,16 @@ export default class CountUp extends Component<CountUpSignature> {
         <div class="separator">+</div>
         <div class="number"><div>seconds</div><div class="count">{{displayCount this.counts.seconds}}</div></div>
       </div>
+      {{#if this.counts.bonusUnits}}
+        <div class="bonus-list">
+          {{#each this.counts.bonusUnits as |bonus|}}
+            <div class="bonus-unit">
+              <div class="separator">+</div>
+              <div class="number"><div>{{bonus.name}}</div><div class="count">{{displayCount bonus.count}}</div></div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
     </div>
-    {{#if this.moments}}
-      <div class="number"><div>moments</div><div class="count">{{displayCount this.moments}}</div></div>
-    {{/if}}
   </template>
 }
