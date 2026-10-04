@@ -49,18 +49,18 @@ body {
 
 @font-face {
   font-family: 'DSEG7-Classic';
-  src: url('/assets/DSEG7Classic-Bold.woff2') format('woff2'),
-  url('/assets/DSEG7Classic-Bold.woff') format('woff'),
-  url('/assets/DSEG7Classic-Bold.ttf') format('truetype');
+  src: url('/thirty-plus/assets/DSEG7Classic-Bold.woff2') format('woff2'),
+  url('/thirty-plus/assets/DSEG7Classic-Bold.woff') format('woff'),
+  url('/thirty-plus/assets/DSEG7Classic-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'DSEG7-Classic';
-  src: url('/assets/DSEG7Classic-Regular.woff2') format('woff2'),
-  url('/assets/DSEG7Classic-Regular.woff') format('woff'),
-  url('/assets/DSEG7Classic-Regular.ttf') format('truetype');
+  src: url('/thirty-plus/assets/DSEG7Classic-Regular.woff2') format('woff2'),
+  url('/thirty-plus/assets/DSEG7Classic-Regular.woff') format('woff'),
+  url('/thirty-plus/assets/DSEG7Classic-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
