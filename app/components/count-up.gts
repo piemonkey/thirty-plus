@@ -62,17 +62,20 @@ interface Unit {
   millis: number
 }
 const UNITS: Unit[] = [
+  { name: 'AverageDurationOfHappyCowMooings', millis: 1760 },
   { name: '30^30 planck times', millis: 11100 },
-  // { name: 'Shakes', millis: },
-  { name: '30 jiffys', millis: 600 },
-  // { name: 'Svedbergs', millis: },
+  { name: '30 x 30^3 Shakes', millis: 8100 },
+  { name: '30 jiffys (electronics)', millis: 600 },
+  { name: '30 jiffys (computing)', millis: 10 },
+  { name: '((3*3*30)^3)^3 jiffys (science)', millis: 23 },
+  { name: '(30^3)^3 Svedbergs', millis: 1968 },
   { name: 'TUs (Time Units)', millis: 1024 },
   { name: 'microfortnights', millis: 1210 },
-  { name: 'moments', millis: 1500 },
+  { name: 'half-moments', millis: 1500 },
   { name: 'nanoCenturies', millis: 3156 },
   { name: 'atoms', millis: 160 },
   { name: 'avali', millis: 172 },
-  // { name: 'lavas', millis: },
+  { name: '30^3 lavas', millis: 30 },
   { name: 'vighatis', millis: 24000 },
   { name: 'a fēn (分)', millis: 14400 },
   { name: 'milliKwartiers', millis: 900 },
@@ -145,6 +148,7 @@ export default class CountUp extends Component<CountUpSignature> {
         <div class="number"><div>seconds</div><div class="count">{{displayCount this.counts.seconds}}</div></div>
       </div>
       {{#if this.counts.bonusUnits}}
+        <div class="or">OR</div>
         <div class="bonus-list">
           {{#each this.counts.bonusUnits as |bonus|}}
             <div class="bonus-unit">
