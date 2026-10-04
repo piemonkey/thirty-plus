@@ -1,4 +1,8 @@
 /* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+body {
+  background-color: #1F1F1F;
+  color: #FFF;
+}
 .counter {
   display: flex;
 }
